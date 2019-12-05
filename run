@@ -91,17 +91,31 @@ ln -sfn $MDIR/composer.lock composer.lock
 if [ "$SETUP_MODULES" ]; then
     echo 'Enabling modules ...'
     $INSTANCE/bin/magento module:enable $SETUP_MODULES
+	if [ $? -ne 0 ]
+    then
+        echo 'Enabling of module(s) failed! Abort.'
+        exit 1
+    fi
 fi
 
 echo 'Start deploying ...'
 
 if [ $SETUP_ALL ] || [ $SETUP_DI ]; then
     $INSTANCE/bin/magento setup:di:compile
+	if [ $? -ne 0 ]
+    then
+        echo 'Compilation failed! Abort.'
+        exit 1
+    fi
 fi
 
 if [ $SETUP_ALL ] || [ $SETUP_STATIC_CONTENT ]; then
-    #$INSTANCE/bin/magento setup:static-content:deploy
     . "$DIR/app/static-content-deploy.sh"
+	if [ $? -ne 0 ]
+    then
+        echo 'Deployment of static content failed! Abort.'
+        exit 1
+    fi
 fi
 
 
