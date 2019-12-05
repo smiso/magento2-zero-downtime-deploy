@@ -69,6 +69,7 @@ mkdir -p var;
 
 cp -rf $MDIR/app app
 cp -rf $MDIR/bin bin
+cp -rf $MDIR/lib lib
 cp -rf $MDIR/setup setup
 cp -rf $MDIR/vendor vendor
 
@@ -79,7 +80,6 @@ cp -rf $DIR/app/env.php app/etc/env.php
 
 ln -sfn $MDIR/deploy deploy
 ln -sfn $MDIR/dev dev
-ln -sfn $MDIR/lib lib
 ln -sfn $MDIR/phpserver phpserver
 
 
