@@ -121,6 +121,10 @@ fi
 
 if [ $SETUP_ALL ]; then
     $MDIR/bin/magento maintenance:enable
+	if [ "$SETUP_MODULES" ]; then
+        rm $MDIR/app/etc/config.php
+        cp app/etc/config.php $MDIR/app/etc/
+    fi
     $MDIR/bin/magento setup:upgrade
 fi
 
